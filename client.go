@@ -2,13 +2,13 @@ package socketio_client
 
 import (
 	"encoding/json"
-	"fmt"
-	"github.com/cenkalti/backoff"
-	"github.com/socket-iox/socket-io-client-go/transport"
 	"log"
 	"net/url"
 	"sync"
 	"time"
+
+	"github.com/austbot/socket-io-client-go/transport"
+	"github.com/cenkalti/backoff"
 )
 
 type Client struct {
@@ -29,7 +29,7 @@ func (c *Client) Connect(urlStr string, transport string) error {
 	if len(u.Path) == 0 {
 		u.Path = "socket.io"
 	}
-	c.url = fmt.Sprintf("%s", u)
+	c.url = u.String()
 	c.isClosed = false
 	c.transport = transport
 	return c.doConnect(false)
@@ -82,7 +82,6 @@ func (c *Client) On(name string, handler func(client *Client, data []string)) {
 	}
 
 	c.handlers[name] = handler
-	return
 }
 
 func encode(name string, nameSpace *string, payload interface{}) (*string, error) {

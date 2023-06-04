@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	socketio "github.com/socket-iox/socket-io-client-go"
 	"time"
+
+	socketio "github.com/austbot/socket-io-client-go"
 )
 
 func main() {

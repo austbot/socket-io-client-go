@@ -1,14 +1,16 @@
-module github.com/socket-iox/socket-io-client-go
+module github.com/austbot/socket-io-client-go
 
-go 1.13
+go 1.20
 
 require (
 	github.com/cenkalti/backoff v2.2.1+incompatible
-	github.com/googollee/go-socket.io v1.7.0
-	github.com/gorilla/websocket v1.5.0
+	github.com/fasthttp/websocket v1.5.3
 )
 
 require (
-	github.com/gofrs/uuid v4.0.0+incompatible // indirect
-	github.com/gomodule/redigo v1.8.4 // indirect
+	github.com/andybalholm/brotli v1.0.5 // indirect
+	github.com/klauspost/compress v1.16.5 // indirect
+	github.com/savsgio/gotils v0.0.0-20230208104028-c358bd845dee // indirect
+	github.com/valyala/bytebufferpool v1.0.0 // indirect
+	github.com/valyala/fasthttp v1.47.0 // indirect
 )

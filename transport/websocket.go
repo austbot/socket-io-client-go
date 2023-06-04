@@ -3,10 +3,11 @@ package transport
 import (
 	"encoding/json"
 	"errors"
-	"github.com/gorilla/websocket"
 	"io/ioutil"
 	"net/http"
 	"strings"
+
+	"github.com/fasthttp/websocket"
 )
 
 type Websocket struct {
