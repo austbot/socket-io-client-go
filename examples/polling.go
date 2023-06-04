@@ -10,20 +10,20 @@ import (
 func main() {
 	nameSpace := "/server/realtime"
 	client := socketio.Client{NameSpace: &nameSpace}
-	client.On("connect", func(client *socketio.Client, data []string) {
+	client.On("connect", func(client *socketio.Client, data []string, eventName string) {
 		fmt.Println("connected")
 		client.Emit("register", map[string]string{"key": "server-8fcb4ae3042ddf364d2a9fa16597b92dc3c22aa7"})
 	})
 
-	client.On("disconnect", func(client *socketio.Client, data []string) {
+	client.On("disconnect", func(client *socketio.Client, data []string, eventName string) {
 		fmt.Println("disconnect")
 	})
 
-	client.On("test", func(client *socketio.Client, data []string) {
+	client.On("test", func(client *socketio.Client, data []string, eventName string) {
 		fmt.Println(data)
 	})
 
-	client.On("update", func(client *socketio.Client, data []string) {
+	client.On("update", func(client *socketio.Client, data []string, eventName string) {
 		fmt.Println("update", data)
 	})
 

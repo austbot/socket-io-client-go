@@ -16,7 +16,7 @@ type Client struct {
 	url       string
 	transport string
 	stream    transport.Stream
-	handlers  map[string]func(client *Client, data []string)
+	handlers  map[string]func(client *Client, data []string, eventName string)
 	mutex     sync.RWMutex
 	isClosed  bool
 }
@@ -73,12 +73,12 @@ func (c *Client) Emit(name string, payload interface{}) error {
 	return c.stream.Write(*msg)
 }
 
-func (c *Client) On(name string, handler func(client *Client, data []string)) {
+func (c *Client) On(name string, handler func(client *Client, data []string, eventName string)) {
 	c.mutex.Lock()
 	defer c.mutex.Unlock()
 
 	if c.handlers == nil {
-		c.handlers = make(map[string]func(client *Client, data []string))
+		c.handlers = make(map[string]func(client *Client, data []string, eventName string))
 	}
 
 	c.handlers[name] = handler
@@ -132,10 +132,10 @@ func (c *Client) handleEvent(name string, msgs []string) {
 	handler, ok := c.handlers[name]
 	c.mutex.RUnlock()
 	if okStar {
-		hStar(c, msgs)
+		hStar(c, msgs, name)
 	}
 	if ok {
-		handler(c, msgs)
+		handler(c, msgs, name)
 	}
 }
 
