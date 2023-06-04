@@ -127,11 +127,13 @@ func (c *Client) handleIncoming() {
 }
 
 func (c *Client) handleEvent(name string, msgs []string) {
-
 	c.mutex.RLock()
+	hStar, okStar := c.handlers["*"]
 	handler, ok := c.handlers[name]
 	c.mutex.RUnlock()
-
+	if okStar {
+		hStar(c, msgs)
+	}
 	if ok {
 		handler(c, msgs)
 	}
