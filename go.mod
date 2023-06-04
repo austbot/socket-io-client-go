@@ -1,5 +1,6 @@
 module github.com/austbot/socket-io-client-go
 
+
 go 1.20
 
 require (
